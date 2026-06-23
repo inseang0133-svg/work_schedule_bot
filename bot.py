@@ -23,7 +23,8 @@ BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 PORT = int(os.getenv("PORT", 10000))
 
-WEBHOOK_URL = os.getenv("WEBHOOK_URL")
+# ดึงค่าที่ตั้งเองก่อน ถ้าไม่มีให้ใช้ URL อัตโนมัติจาก Render
+WEBHOOK_URL = os.getenv("WEBHOOK_URL") or os.getenv("RENDER_EXTERNAL_URL")
 
 WEBHOOK_SECRET = os.getenv(
     "WEBHOOK_SECRET",
