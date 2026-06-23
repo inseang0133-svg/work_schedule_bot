@@ -87,13 +87,13 @@ def main():
 
     print("Bot Started (Webhook Mode)")
 
-app.run_webhook(
-    listen="0.0.0.0",
-    port=PORT,
-    webhook_url=WEBHOOK_URL,
-    secret_token=WEBHOOK_SECRET,
-    drop_pending_updates=True
-)
+    app.run_webhook(
+        listen="0.0.0.0",
+        port=PORT,
+        webhook_url=WEBHOOK_URL,
+        secret_token=WEBHOOK_SECRET,
+        drop_pending_updates=True
+    )
 
 
 if __name__ == "__main__":
