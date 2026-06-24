@@ -1,4 +1,5 @@
 import os
+import time
 from dotenv import load_dotenv
 from core.parser import parse_input
 from core.validator import validate_employees
@@ -30,12 +31,32 @@ WEBHOOK_SECRET = os.getenv(
     "WEBHOOK_SECRET",
     "work_schedule_secret"
 )
+LAST_ACTIVITY = 0
+
+WAKEUP_THRESHOLD = 600
+# 600 วินาที = 10 นาที
 
 async def handle_message(
     update: Update,
     context: ContextTypes.DEFAULT_TYPE
 ):
+    global LAST_ACTIVITY
 
+    now = time.time()
+    if now - LAST_ACTIVITY > WAKEUP_THRESHOLD:
+
+        await update.message.reply_text(
+            "👋 ฉันพร้อมสร้างรูปตารางงานแล้ว\n"
+            "ส่งข้อมูลวันหยุดพนักงานมาได้เลย\n\n"
+            "🔥ตัวอย่าง🔥:\n"
+            "1.ฝน 4/10/14/25\n"
+            "2.แก้ว 2/18/21/29\n"
+            "3.ปาร์ตี้ 12/16/23/27\n"
+            "หากผมเงียบ😴 หลังไม่ได้ใช้งานสักพัก\n"
+            "💥ให้ส่งสติกเกอร์หรือข้อความอะไรก็ได้เพื่อปลุกฉัน แล้วรอฉันตอบ ค่อยส่งข้อมูล วันหยุด ผนง."
+        )
+
+    LAST_ACTIVITY = now
     try:
 
         text = update.message.text.strip()
