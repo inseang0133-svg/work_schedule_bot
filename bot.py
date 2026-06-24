@@ -51,12 +51,16 @@ async def handle_message(
             "🔥ตัวอย่าง🔥:\n"
             "1.ฝน 4/10/14/25\n"
             "2.แก้ว 2/18/21/29\n"
-            "3.ปาร์ตี้ 12/16/23/27\n"
+            "3.ปาร์ตี้ 12/16/23/27\n\n"
             "หากผมเงียบ😴 หลังไม่ได้ใช้งานสักพัก\n"
-            "💥ให้ส่งสติกเกอร์หรือข้อความอะไรก็ได้เพื่อปลุกฉัน แล้วรอฉันตอบ ค่อยส่งข้อมูล วันหยุด ผนง."
+            "💥ให้ส่งสติกเกอร์หรือข้อความอะไรก็ได้เพื่อปลุกผม แล้วรอผมตอบ ค่อยส่งข้อมูล วันหยุด ผนง."
         )
 
     LAST_ACTIVITY = now
+    text = update.message.text
+
+    if text is None:
+        return
     try:
 
         text = update.message.text.strip()
@@ -102,7 +106,7 @@ def main():
 
     app.add_handler(
         MessageHandler(
-            filters.TEXT & ~filters.COMMAND,
+            filters.ALL & ~filters.COMMAND,
             handle_message
         )
     )
