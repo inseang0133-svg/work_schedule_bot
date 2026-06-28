@@ -116,9 +116,9 @@ def main():
     app.run_webhook(
         listen="0.0.0.0",
         port=PORT,
-        webhook_url=WEBHOOK_URL,
-        secret_token=WEBHOOK_SECRET,
-        drop_pending_updates=True
+        url_path=WEBHOOK_SECRET,      # ระบุ Path ให้ตรงกับคีย์ลับ
+        secret_token=WEBHOOK_SECRET,  # ป้องกันความปลอดภัยบอต
+        webhook_url=f"{WEBHOOK_URL}"  # ส่งแค่ URL หลักของ Render เข้าไป ไม่ต้องใส่ / ต่อท้ายซ้ำซ้อน
     )
 
 
